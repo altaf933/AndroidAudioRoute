@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.0.0_ff0f691306b6b275f0da09ee3965cce03b471170.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_88f838e6f793b10daa9d57d47dfb78d4682af73f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.0_e3e3a8670f1cc82ec3d64cf80979f5b039fd185a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.0.0_e1837fc99e0410d0a65bbfc46d2cfc13a2c24bb1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_5db5f00c84448fef5cdea0475c2cde38b40f7a95.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.0.0_c369aa15848dbe428057877f01e17d0bc92f871c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Altaf\SharingData\Software\SDK\extras\android\m2repository\com\android\support\support-annotations\25.0.0\support-annotations-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\support-annotations-25.0.0_0deba2cd5712683d638b13ccabada5c12513ce3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.0_805c7d21b8ad33e594260527cf93ac5d894eedab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.0.0_c0ac95bdb4239baae08a149dee4f321699cc5c4f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.0_55fdfea7d015718f1d8eb8d2eea0d09a1c2026e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5e497d60f0cb6ce87c458ac5420a46d0fed49bd0">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.0.0_2438a09f72d2c311056220d29ca3fbe03cf98778.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.0.0_c43db4382ddb194673b5f237677e7e69a8e139ea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_cf49362efc68e62045b46e4497275793652ebd02.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\design\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26384be22ddc74cfe197ebda9edbc7d1fd8bd537">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.0.0_5ed307efedcbf776e610d5984dc5509febb89936.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.0.0_29cc29ffc2c39a1a08df3814352ad57b277ae792.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_c48f4f4f706eab507f0ad97a664306afdab55cd4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_7c62da594e3f5fd6b14dba3e3e86818d95585b92.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.0_8867204a2e3d3177d8fa3135bbcd4c0f151d6fdc.jar" />
+    </item>
+
+</items>
