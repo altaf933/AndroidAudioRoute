@@ -15,6 +15,7 @@ import quock.audio.receiver.AudioRouter;
 import quock.randdevelopment.R;
 
 import static quock.randdevelopment.BlutoothMainActivity.BLUTOOTH;
+import static quock.randdevelopment.BlutoothMainActivity.Headphone3;
 import static quock.randdevelopment.BlutoothMainActivity.SPEAKER;
 
 /**
@@ -78,6 +79,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             }
             if (subText.getText().toString().equalsIgnoreCase(SPEAKER)) {
                 audioRouter.setRouteMode(AudioRouter.AudioRouteMode.SPEAKER);
+            }
+            if (subText.getText().toString().equalsIgnoreCase(Headphone3)) {
+                audioRouter.setRouteMode(AudioRouter.AudioRouteMode.WIRED_HEADPHONE);
             }
 
         }

@@ -50,6 +50,7 @@ public class BlutoothMainActivity extends FragmentActivity {
     public static final String SPEAKER = "Speaker";
     public static final String BLUTOOTH = "Bluetooth";
     public static final String AUXILARY = "Auxilary";
+    public static final String Headphone3 = "Headphone3";
 
     HashMap<String, String> listMap;
     private RecyclerView recyclerView;
@@ -72,6 +73,8 @@ public class BlutoothMainActivity extends FragmentActivity {
 
         audioM = (AudioManager) getApplicationContext().
                 getSystemService(getApplicationContext().AUDIO_SERVICE);
+
+
         AudioDeviceInfo[] adi = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             adi = audioM.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
@@ -82,7 +85,14 @@ public class BlutoothMainActivity extends FragmentActivity {
 //                listMap.put(productName.toString(), AUXILARY);
                 if (devices.getType() == AudioDeviceInfo.TYPE_WIRED_HEADPHONES) {
                     LogUtils.d("AudioDeviceInfo.TYPE_AUX_LINE");
-                    listMap.put(productName.toString(), AUXILARY);
+                    listMap.put("Headphone1", Headphone3);
+                }if (devices.getType() == AudioDeviceInfo.TYPE_AUX_LINE) {
+                    LogUtils.d("AudioDeviceInfo.TYPE_AUX_LINE");
+                    listMap.put("Headphone2", Headphone3);
+                }
+                if (devices.getType() == AudioDeviceInfo.TYPE_WIRED_HEADSET) {
+                    LogUtils.d("AudioDeviceInfo.TYPE_AUX_LINE");
+                    listMap.put("Headphone3", Headphone3);
                 }
                 if (devices.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP) {
                     LogUtils.d("AudioDeviceInfo.TYPE_BLUETOOTH_A2DP");
