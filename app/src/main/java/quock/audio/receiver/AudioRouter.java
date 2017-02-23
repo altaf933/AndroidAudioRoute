@@ -30,9 +30,9 @@ import quock.audio.util.AudioSystem;
 public final class AudioRouter extends BroadcastReceiver {
     private final Context context;
     private AudioRouteMode routeMode = AudioRouteMode.NO_ROUTING;
-    public Collection<BluetoothDevice> connectedBluetoothDevices = new HashSet<>();
-    private Collection<Headset> connectedHeadsets = new HashSet<>();
-    private Collection<UsbAudio> connectedUsbAudios = new HashSet<>();
+    public Collection<BluetoothDevice> connectedBluetoothDevices = new HashSet<BluetoothDevice>();
+    private Collection<Headset> connectedHeadsets = new HashSet<Headset>();
+    private Collection<UsbAudio> connectedUsbAudios = new HashSet<UsbAudio>();
     private final int initialRoute;
     private AudioManager audioManager;
 
@@ -219,47 +219,45 @@ public final class AudioRouter extends BroadcastReceiver {
 
         // update connecting devices
         int connectionState = extras.getInt("state");
-        switch (action) {
-            case INTENT_ACTION_ANALOG_AUDIO_DOCK_PLUG:
-            case MEDIA_ACTION_ANALOG_AUDIO_DOCK_PLUG:
-                if ("usb_audio".equals(extras.getString("name"))) {
-                    UsbAudio usbAudio = new UsbAudio();
-                    usbAudio.setAddress(getStringFromBundle(extras, "address", ""));
-                    usbAudio.setPortName(getStringFromBundle(extras, "name", ""));
-
-                    if (connectionState == 1) {
-                        connectedUsbAudios.add(usbAudio);
-                    } else if (connectionState == 0) {
-                        connectedUsbAudios.remove(usbAudio);
-                    }
-                    setupRoute();
-                }
-                break;
-            case Intent.ACTION_HEADSET_PLUG:
-                Headset headset = new Headset();
-                headset.setAddress(getStringFromBundle(extras, "address", ""));
-                headset.setPortName(getStringFromBundle(extras, "portName", ""));
-                headset.setMicrophone(extras.getInt("microphone", 0));
+        if (action.equals(INTENT_ACTION_ANALOG_AUDIO_DOCK_PLUG) || action.equals(MEDIA_ACTION_ANALOG_AUDIO_DOCK_PLUG)) {
+            if ("usb_audio".equals(extras.getString("name"))) {
+                UsbAudio usbAudio = new UsbAudio();
+                usbAudio.setAddress(getStringFromBundle(extras, "address", ""));
+                usbAudio.setPortName(getStringFromBundle(extras, "name", ""));
 
                 if (connectionState == 1) {
-                    connectedHeadsets.add(headset);
+                    connectedUsbAudios.add(usbAudio);
                 } else if (connectionState == 0) {
-                    connectedHeadsets.remove(headset);
+                    connectedUsbAudios.remove(usbAudio);
                 }
                 setupRoute();
-                break;
-            case BLUETOOTH_A2DP_CONNECTION_STATE_CHANGED:
-                BluetoothDevice bluetoothDevice = (BluetoothDevice) extras.get("android.bluetooth.device.extra.DEVICE");
-                if (bluetoothDevice != null) {
-                    int bluetoothConnectionState = extras.getInt("android.bluetooth.profile.extra.STATE");
-                    if (bluetoothConnectionState == 2) {
-                        connectedBluetoothDevices.add(bluetoothDevice);
-                    } else if (bluetoothConnectionState == 0) {
-                        connectedBluetoothDevices.remove(bluetoothDevice);
-                    }
+            }
+
+        } else if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
+            Headset headset = new Headset();
+            headset.setAddress(getStringFromBundle(extras, "address", ""));
+            headset.setPortName(getStringFromBundle(extras, "portName", ""));
+            headset.setMicrophone(extras.getInt("microphone", 0));
+
+            if (connectionState == 1) {
+                connectedHeadsets.add(headset);
+            } else if (connectionState == 0) {
+                connectedHeadsets.remove(headset);
+            }
+            setupRoute();
+
+        } else if (action.equals(BLUETOOTH_A2DP_CONNECTION_STATE_CHANGED)) {
+            BluetoothDevice bluetoothDevice = (BluetoothDevice) extras.get("android.bluetooth.device.extra.DEVICE");
+            if (bluetoothDevice != null) {
+                int bluetoothConnectionState = extras.getInt("android.bluetooth.profile.extra.STATE");
+                if (bluetoothConnectionState == 2) {
+                    connectedBluetoothDevices.add(bluetoothDevice);
+                } else if (bluetoothConnectionState == 0) {
+                    connectedBluetoothDevices.remove(bluetoothDevice);
                 }
-                setupRoute();
-                break;
+            }
+            setupRoute();
+
         }
     }
 
@@ -374,19 +372,13 @@ public final class AudioRouter extends BroadcastReceiver {
         for (BluetoothDevice bluetoothDevice : connectedBluetoothDevices) {
             AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP, status, bluetoothDevice.getAddress(), bluetoothDevice.getName());
 
-            switch (bluetoothDevice.getBluetoothClass().getDeviceClass()) {
-                case BluetoothClass.Device.AUDIO_VIDEO_HEADPHONES:
-                case BluetoothClass.Device.AUDIO_VIDEO_WEARABLE_HEADSET:
-                    AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES, status, bluetoothDevice.getAddress(), bluetoothDevice.getName());
-                    break;
-                case BluetoothClass.Device.AUDIO_VIDEO_CAR_AUDIO:
-                case BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE:
-                case BluetoothClass.Device.AUDIO_VIDEO_HIFI_AUDIO:
-                case BluetoothClass.Device.AUDIO_VIDEO_LOUDSPEAKER:
-                case BluetoothClass.Device.AUDIO_VIDEO_PORTABLE_AUDIO:
-                case BluetoothClass.Device.AUDIO_VIDEO_SET_TOP_BOX:
-                    AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER, status, bluetoothDevice.getAddress(), bluetoothDevice.getName());
-                    break;
+            int i = bluetoothDevice.getBluetoothClass().getDeviceClass();
+            if (i == BluetoothClass.Device.AUDIO_VIDEO_HEADPHONES || i == BluetoothClass.Device.AUDIO_VIDEO_WEARABLE_HEADSET) {
+                AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES, status, bluetoothDevice.getAddress(), bluetoothDevice.getName());
+
+            } else if (i == BluetoothClass.Device.AUDIO_VIDEO_CAR_AUDIO || i == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE || i == BluetoothClass.Device.AUDIO_VIDEO_HIFI_AUDIO || i == BluetoothClass.Device.AUDIO_VIDEO_LOUDSPEAKER || i == BluetoothClass.Device.AUDIO_VIDEO_PORTABLE_AUDIO || i == BluetoothClass.Device.AUDIO_VIDEO_SET_TOP_BOX) {
+                AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER, status, bluetoothDevice.getAddress(), bluetoothDevice.getName());
+
             }
         }
     }

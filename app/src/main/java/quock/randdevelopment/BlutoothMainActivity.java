@@ -20,7 +20,6 @@ import android.util.Log;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,40 +36,30 @@ public class BlutoothMainActivity extends FragmentActivity {
 
     private static final String TAG = BlutoothMainActivity.class.getName();
     AudioManager audioM = null;
-    //    BluetoothAdapter btAdapter;
     public static Context ctx;
-    //    BluetoothManager bMgr = null;
-//    private Set<BluetoothDevice> devices;
-//    private MyReceiver receiver;
-//    IntentFilter filter1 = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
-//    IntentFilter filter2 = new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED);
-    ToggleButton tb1 = null;
-    MediaPlayer mediaPlayer;
-    //    String str;
+
+    HashMap<String, String> listMap;
     AudioRouter audioRouter;
     public static final String SPEAKER = "Speaker";
     public static final String BLUTOOTH = "Bluetooth";
     public static final String AUXILARY = "Auxilary";
     public static final String Headphone3 = "Headphone";
 
-    HashMap<String, String> listMap;
-    private RecyclerView recyclerView;
-
-    //Android media route api
-    private MediaRouter mMediaRouter;
-
-    private ArrayList<String> mRouteNames = new ArrayList<String>();
-    private final ArrayList<MediaRouter.RouteInfo> mRouteInfos = new ArrayList<MediaRouter.RouteInfo>();
-
-    public static final String AUDIO_OUTPUT_CHANGED = "audio_output";
-
     private MusicIntentReceiver myHeadPhonePlugReceiver;
-    private MainAdapter mAdapter;
-
     //Blutoothth adapter class
     private BluetoothAdapter mBtAdapter;
     private BluetoothA2dp mA2dpService;
     //End of bluetooth adapter class
+
+
+    private RecyclerView recyclerView;
+    MediaPlayer mediaPlayer;
+    //Android media route api
+    private MediaRouter mMediaRouter;
+    ToggleButton tb1 = null;
+    public static final String AUDIO_OUTPUT_CHANGED = "audio_output";
+    private MainAdapter mAdapter;
+
 
     BroadcastReceiver mReceiverBluetooth = new BroadcastReceiver() {
 
@@ -104,7 +93,7 @@ public class BlutoothMainActivity extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluttoth_lay);
-        myHeadPhonePlugReceiver = new MusicIntentReceiver();
+
 
         tb1 = (ToggleButton) findViewById(R.id.toggleButton1);
         recyclerView = (RecyclerView) findViewById(R.id.rvListitems);
@@ -114,14 +103,19 @@ public class BlutoothMainActivity extends FragmentActivity {
 
         audioRouter = new AudioRouter(this);
         audioRouter.setRouteMode(AudioRouter.AudioRouteMode.SPEAKER);
+
         this.registerReceiver(receiver, new IntentFilter(AUDIO_OUTPUT_CHANGED));
 
         HashSet<String> setItems = new HashSet<>();
-
         listMap = new HashMap<String, String>();
+
 
         audioM = (AudioManager) getApplicationContext().
                 getSystemService(getApplicationContext().AUDIO_SERVICE);
+
+        //Register listener for headset plugged in
+        myHeadPhonePlugReceiver = new MusicIntentReceiver();
+        //End of register plugged in
 
         //Register bluetooth listener
         registerReceiver(mReceiverBluetooth,
@@ -137,50 +131,7 @@ public class BlutoothMainActivity extends FragmentActivity {
 
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
         mBtAdapter.getProfileProxy(this, mA2dpServiceListener, BluetoothProfile.A2DP);
-        listMap.put(SPEAKER, "Phone");
-
-//        AudioDeviceInfo[] adi = null;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//            adi = audioM.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
-//            for (AudioDeviceInfo devices :
-//                    adi) {
-//                CharSequence productName = devices.getProductName();
-//                if (devices.getType() == AudioDeviceInfo.TYPE_WIRED_HEADPHONES) {
-//                    LogUtils.d("AudioDeviceInfo.TYPE_AUX_LINE");
-//                    listMap.put("Headphone1", Headphone3);
-//                }
-//
-//                if (devices.getType() == AudioDeviceInfo.TYPE_WIRED_HEADSET) {
-//                    LogUtils.d("AudioDeviceInfo.TYPE_WIRED_HEADSET");
-//                    listMap.put("Headphone", Headphone3);
-//                }
-////                if (devices.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP) {
-////                    LogUtils.d("AudioDeviceInfo.TYPE_BLUETOOTH_A2DP");
-////                    setItems.add("BLUTOOTH ADP");
-////                    listMap.put(productName.toString(), BLUTOOTH);
-////                }
-////                if (devices.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO) {
-////                    LogUtils.d("AudioDeviceInfo.TYPE_BLUETOOTH_A2DP");
-////                    setItems.add("BLUTOOTH ADP");
-////                    listMap.put(productName.toString(), BLUTOOTH);
-////                }
-//
-//                if (devices.getType() == AudioDeviceInfo.TYPE_BUILTIN_SPEAKER) {
-//                    LogUtils.d("AudioDeviceInfo.TYPE_BUILTIN_SPEAKER");
-//                    setItems.add("SPEAKER");
-//                    listMap.put(productName.toString(), SPEAKER);
-//                }
-////                listMap.put("Speaker", SPEAKER);
-//            }
-//
-//        }
-
-
-//        bMgr = (BluetoothManager) getApplicationContext().
-//                getSystemService(getApplicationContext().BLUETOOTH_SERVICE);
-
-//        btAdapter = BluetoothAdapter.getDefaultAdapter();
-//        devices = btAdapter.getBondedDevices();
+        listMap.put("Phone", SPEAKER);
 
 
         recyclerView.setHasFixedSize(true);
@@ -193,10 +144,6 @@ public class BlutoothMainActivity extends FragmentActivity {
         mAdapter = new MainAdapter(this, listMap, audioRouter);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-//        MediaRouter mr = (MediaRouter)getSystemService(Context.MEDIA_ROUTER_SERVICE);
-//        MediaRouter.RouteInfo ri = mr.getSelectedRoute(MediaRouter.ROUTE_TYPE_LIVE_AUDIO);
-//        CharSequence name = ri.getName();//Headphone,Phone
 
 
         mediaPlayer = MediaPlayer.create(this, R.raw.katy_parry);
@@ -296,7 +243,6 @@ public class BlutoothMainActivity extends FragmentActivity {
                 if (bluetoothDevices.size() > 0) {
                     for (BluetoothDevice devices :
                             bluetoothDevices) {
-//                        if (devices.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP)
                         listMap.put(devices.getName(), BLUTOOTH);
                         audioRouter.connectedBluetoothDevices.add(devices);
                     }
@@ -316,6 +262,18 @@ public class BlutoothMainActivity extends FragmentActivity {
 
         @Override
         public void onServiceDisconnected(int profile) {
+            if (mA2dpService != null) {
+                if (profile == BluetoothProfile.A2DP) {
+                    List<BluetoothDevice> bluetoothDevices =
+                            mA2dpService.getConnectedDevices();
+
+                    for (BluetoothDevice devices :
+                            bluetoothDevices) {
+                        listMap.remove(devices.getName());
+                    }
+                }
+
+            }
             setIsA2dpReady(false);
         }
 
