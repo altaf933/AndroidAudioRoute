@@ -30,7 +30,7 @@ import quock.audio.util.AudioSystem;
 public final class AudioRouter extends BroadcastReceiver {
     private final Context context;
     private AudioRouteMode routeMode = AudioRouteMode.NO_ROUTING;
-    private Collection<BluetoothDevice> connectedBluetoothDevices = new HashSet<>();
+    public Collection<BluetoothDevice> connectedBluetoothDevices = new HashSet<>();
     private Collection<Headset> connectedHeadsets = new HashSet<>();
     private Collection<UsbAudio> connectedUsbAudios = new HashSet<>();
     private final int initialRoute;
@@ -278,14 +278,13 @@ public final class AudioRouter extends BroadcastReceiver {
                 setupHeadphone(true);
                 break;
             case SPEAKER:
-
-                // enable speaker
-                setupSpeaker(true);
                 // disable other sources
                 setupHeadphone(false);
                 setupUsbAudio(false);
                 setupBluetoothA2DP(false);
 
+                // enable speaker
+                setupSpeaker(true);
                 break;
             case USB_AUDIO:
                 // disable other sources
@@ -349,8 +348,7 @@ public final class AudioRouter extends BroadcastReceiver {
     private void setupSpeaker(boolean enabled) {
         if (enabled) {
             AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_SPEAKER);
-            AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_SPEAKER,
-                    AudioSystem.DEVICE_STATE_AVAILABLE, "", "");
+            AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_SPEAKER, AudioSystem.DEVICE_STATE_AVAILABLE, "", "");
         } else {
             AudioSystem.setDeviceConnectionState(AudioSystem.DEVICE_OUT_SPEAKER, AudioSystem.DEVICE_STATE_UNAVAILABLE, "", "");
         }

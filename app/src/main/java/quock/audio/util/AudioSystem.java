@@ -4,14 +4,15 @@ import android.os.Build;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Method;
 
 /**
- *{@link android.media.AudioSystem} (hidden API) wrapper.
- *
+ * {@link android.media.AudioSystem} (hidden API) wrapper.
+ * <p>
  * <ul>
  * <li>This class requires a permission 'android.permission.MODIFY_AUDIO_SETTINGS'.</li>
  * <li>This class uses the hidden API, so the function will be broken in the future Android updates.</li>
@@ -23,8 +24,10 @@ import java.lang.reflect.Method;
 public final class AudioSystem {
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ DEVICE_STATE_UNAVAILABLE, DEVICE_STATE_AVAILABLE})
-    public @interface DeviceState{}
+    @IntDef({DEVICE_STATE_UNAVAILABLE, DEVICE_STATE_AVAILABLE})
+    public @interface DeviceState {
+    }
+
     public static final int DEVICE_STATE_UNAVAILABLE = 0;
     public static final int DEVICE_STATE_AVAILABLE = 1;
 
@@ -36,7 +39,9 @@ public final class AudioSystem {
             DEVICE_OUT_AUX_DIGITAL, DEVICE_OUT_ANLG_DOCK_HEADSET, DEVICE_OUT_DGTL_DOCK_HEADSET,
             DEVICE_OUT_USB_ACCESSORY, DEVICE_OUT_USB_DEVICE, DEVICE_OUT_REMOTE_SUBMIX
     })
-    public @interface DeviceOut{}
+    public @interface DeviceOut {
+    }
+
     public static final int DEVICE_OUT_EARPIECE = 0x1;
     public static final int DEVICE_OUT_SPEAKER = 0x2;
     public static final int DEVICE_OUT_WIRED_HEADSET = 0x4;
@@ -61,7 +66,9 @@ public final class AudioSystem {
             FORCE_WIRED_ACCESSORY, FORCE_BT_CAR_DOCK, FORCE_BT_DESK_DOCK, FORCE_ANALOG_DOCK,
             FORCE_DIGITAL_DOCK, FORCE_NO_BT_A2DP
     })
-    public @interface CategoryConfig{}
+    public @interface CategoryConfig {
+    }
+
     public static final int FORCE_NONE = 0;
     public static final int FORCE_SPEAKER = 1;
     public static final int FORCE_HEADPHONES = 2;
@@ -80,7 +87,9 @@ public final class AudioSystem {
     @IntDef({
             FOR_COMMUNICATION, FOR_MEDIA, FOR_RECORD, FOR_DOCK
     })
-    public @interface Usage{}
+    public @interface Usage {
+    }
+
     public static final int FOR_COMMUNICATION = 0;
     public static final int FOR_MEDIA = 1;
     public static final int FOR_RECORD = 2;
@@ -90,6 +99,7 @@ public final class AudioSystem {
 
     /**
      * Obtains AudioSystem class
+     *
      * @return class object
      */
     private static Class<?> getAudioSystem() {
@@ -106,8 +116,8 @@ public final class AudioSystem {
     /**
      * Set the device connection state
      *
-     * @param device device kind id
-     * @param state DEVICE_STATE_AVAILABLE or DEVICE_STATE_UNAVAILABLE
+     * @param device        device kind id
+     * @param state         DEVICE_STATE_AVAILABLE or DEVICE_STATE_UNAVAILABLE
      * @param deviceAddress device address
      */
     public static void setDeviceConnectionState(@DeviceOut int device, @DeviceState int state, @NonNull String deviceAddress) {
@@ -117,12 +127,14 @@ public final class AudioSystem {
     /**
      * Set the device connection state
      *
-     * @param device device kind id
-     * @param state DEVICE_STATE_AVAILABLE or DEVICE_STATE_UNAVAILABLE
+     * @param device        device kind id
+     * @param state         DEVICE_STATE_AVAILABLE or DEVICE_STATE_UNAVAILABLE
      * @param deviceAddress device address
-     * @param deviceName device name(required on Android version >= 6)
+     * @param deviceName    device name(required on Android version >= 6)
      */
-    public static void setDeviceConnectionState(@DeviceOut int device, @DeviceState int state, @NonNull String deviceAddress, @Nullable String deviceName) {
+    public static void setDeviceConnectionState(@DeviceOut int device, @DeviceState int state,
+                                                @NonNull String deviceAddress,
+                                                @Nullable String deviceName) {
         Class<?> audioSystem = getAudioSystem();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -147,7 +159,7 @@ public final class AudioSystem {
     /**
      * Forces audio source
      *
-     * @param usage audio usage
+     * @param usage  audio usage
      * @param config device categories config
      */
     public static void setForceUse(@Usage int usage, @CategoryConfig int config) {
@@ -161,12 +173,14 @@ public final class AudioSystem {
     }
 
     /**
-     * Obtains current audio source
+     * Obtains CURRENT audio source
      *
      * @param usage audio usage
      * @return device categories config
      */
-    public static @CategoryConfig int getForceUse(@Usage int usage) {
+    public static
+    @CategoryConfig
+    int getForceUse(@Usage int usage) {
         Class<?> audioSystem = getAudioSystem();
 
         try {
@@ -200,5 +214,23 @@ public final class AudioSystem {
         }
 
         return FORCE_NONE;
+    }
+
+
+    public void makeSpeakerAvailable(boolean paramBoolean1, boolean paramBoolean2)
+    {
+        Log.d("Eclair_MR1", "makeSpeakerAvailable(" + paramBoolean1 + "," + paramBoolean2 + ")");
+        makeAudioAvailable("DEVICE_OUT_SPEAKER", paramBoolean1, paramBoolean2, "");
+    }
+
+    public void makeAudioAvailable(String paramString1, boolean paramBoolean1, boolean paramBoolean2, String paramString2)
+    {
+        Log.d("Phone", "makeAudioAvailable()   sKey = " + paramString1 + "   Reset = " + paramBoolean2 + "   sAddress = " + paramString2);
+//        if (getAudioConstantIntValue(paramString1) == 0) {
+//            return;
+//        }
+        Log.d("Phone", "makeAudioAvailable()   getAudioConstantIntValue(" + paramString1 + ")" + "found ");
+//        setDeviceConnectionState(AudioSystem.DEVICE_OUT_SPEAKER,paramBoolean1,paramBoolean2,paramString2);
+//        makeAudioAvailable(getAudioConstantIntValue(paramString1), paramBoolean1, paramBoolean2, paramString2);
     }
 }

@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\RandDevelopment\CordovaLib\unspecified\release\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="03ea17ffbc41fdabd0d6862a64ae5591eebeedc4">
+        <dex dex="D:\Contrib\Android\RandDevelopment\app\build\intermediates\pre-dexed\debug\CordovaLib-unspecified-release_50728909dd55cdfb5efc42ac8f15f58631034a96.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="D:\Contrib\Android\RandDevelopment\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"

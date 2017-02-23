@@ -1,6 +1,7 @@
 package quock.audio.adapter;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,17 +24,22 @@ import static quock.randdevelopment.BlutoothMainActivity.SPEAKER;
  */
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
+    private final AudioManager audioM;
     private HashMap<String, String> modelList;
     private LayoutInflater inflater;
     private Context context;
     //    String str;
     private AudioRouter audioRouter;
 
-    public MainAdapter(Context context, HashMap<String, String> modelList) {
+    public MainAdapter(Context context, HashMap<String, String> modelList, AudioRouter audioRouter) {
         this.inflater = LayoutInflater.from(context);
         this.modelList = modelList;
         this.context = context;
-        audioRouter = new AudioRouter(context);
+        this.audioRouter = audioRouter;
+//        this.audioRouter = new AudioRouter(context);
+        audioM = (AudioManager) context.getApplicationContext().
+                getSystemService(context.getApplicationContext().AUDIO_SERVICE);
+//        audioM.setMode(AudioManager.STREAM_MUSIC);
     }
 
     @Override
@@ -75,13 +81,30 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             // We can access the data within the views
             Toast.makeText(context, mainText.getText(), Toast.LENGTH_SHORT).show();
             if (subText.getText().toString().equalsIgnoreCase(BLUTOOTH)) {
+//                audioM.setMode(AudioManager.STREAM_MUSIC);
+//                audioM.setBluetoothA2dpOn(true);
                 audioRouter.setRouteMode(AudioRouter.AudioRouteMode.BLUETOOTH_A2DP);
+
             }
             if (subText.getText().toString().equalsIgnoreCase(SPEAKER)) {
+//                audioRouter.setDeviceConnectionState(DEVICE_IN_WIRED_HEADSET, DEVICE_STATE_UNAVAILABLE, "");
+//                audioRouter.setDeviceConnectionState(DEVICE_OUT_WIRED_HEADSET, DEVICE_STATE_UNAVAILABLE, "");
+//                audioRouter.setDeviceConnectionState(DEVICE_OUT_EARPIECE, DEVICE_STATE_UNAVAILABLE, "");
+//                audioRouter.setDeviceConnectionState(DEVICE_OUT_EARPIECE, DEVICE_STATE_UNAVAILABLE, "");
+//                AudioRouter.setDeviceConnectionState();
                 audioRouter.setRouteMode(AudioRouter.AudioRouteMode.SPEAKER);
+//                audioM.setSpeakerphoneOn(true);
             }
             if (subText.getText().toString().equalsIgnoreCase(Headphone3)) {
+//                audioM.setWiredHeadsetOn(true);
                 audioRouter.setRouteMode(AudioRouter.AudioRouteMode.WIRED_HEADPHONE);
+                //                audioRouter.setRouteMode(AudioRouter.AudioRouteMode.BLUETOOTH_A2DP);
+
+//                audioRouter.setDeviceConnectionState(DEVICE_IN_WIRED_HEADSET, DEVICE_STATE_AVAILABLE, "");
+//                audioRouter.setDeviceConnectionState(DEVICE_OUT_WIRED_HEADSET, DEVICE_STATE_AVAILABLE, "");
+//                audioRouter.setDeviceConnectionState(DEVICE_OUT_EARPIECE, DEVICE_STATE_AVAILABLE, "");
+
+
             }
 
         }

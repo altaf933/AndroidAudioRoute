@@ -23,13 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name="quock.receiver.MyReceiver">
-            <intent-filter>
-                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
-                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
-                <action android:name="android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED"></action>
-            </intent-filter>
-        </receiver>
+        <!--<receiver android:name="quock.receiver.MyReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="\android.bluetooth.device.action.ACL_CONNECTED" />-->
+                <!--<action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />-->
+                <!--<action android:name="android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED"></action>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
     </application>
 
 </manifest>
